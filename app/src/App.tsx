@@ -184,7 +184,7 @@ function GallerySlider() {
     transitionEnabledRef.current = transitionEnabled;
   }, [transitionEnabled]);
 
-  /* Auto-scroll: steady 0.5s tick using a ref-based interval.
+  /* Auto-scroll: steady 1s tick using a ref-based interval.
      The interval never resets on state changes — it ticks continuously
      so there is zero dead time at the loop boundary. */
   useEffect(() => {
@@ -195,7 +195,7 @@ function GallerySlider() {
         if (prev >= totalCards) return prev; // snap-back is in progress
         return prev + 1;
       });
-    }, 500);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [isPaused, isDragging, totalCards]);
@@ -219,8 +219,8 @@ function GallerySlider() {
     if (track) {
       track.addEventListener("transitionend", doSnap, { once: true });
     }
-    /* Fallback: tighter than before — 370ms matches the 350ms CSS transition */
-    const fallback = setTimeout(doSnap, 370);
+    /* Fallback: tighter than before — 520ms matches the 500ms CSS transition */
+    const fallback = setTimeout(doSnap, 520);
     return () => {
       if (track) track.removeEventListener("transitionend", doSnap);
       clearTimeout(fallback);
@@ -331,7 +331,7 @@ function GallerySlider() {
             style={{
               transform: transformStyle,
               transition: shouldTransition
-                ? "transform 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                ? "transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
                 : "none",
             }}
           >
