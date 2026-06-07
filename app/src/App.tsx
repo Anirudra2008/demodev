@@ -168,15 +168,21 @@ function GallerySlider() {
 
   /* Clamp index on resize */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentIndex((prev) => Math.min(prev, totalCards));
   }, [visibleCount, totalCards]);
 
   /* Ref to always hold latest index — avoids stale closures in the interval */
   const currentIndexRef = useRef(currentIndex);
-  currentIndexRef.current = currentIndex;
-
   const transitionEnabledRef = useRef(transitionEnabled);
-  transitionEnabledRef.current = transitionEnabled;
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    transitionEnabledRef.current = transitionEnabled;
+  }, [transitionEnabled]);
 
   /* Auto-scroll: steady 3s tick using a ref-based interval.
      The interval never resets on state changes — it ticks continuously

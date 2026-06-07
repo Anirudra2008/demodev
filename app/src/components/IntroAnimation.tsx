@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 /* ─────────────────────────────────────────────────────────────────
@@ -34,11 +34,8 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
   const curtainBottomRef = useRef<HTMLDivElement>(null);
   const pulseRingRef = useRef<HTMLDivElement>(null);
   const innerGlowRef = useRef<HTMLDivElement>(null);
-  const [, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     // Lock scrolling during intro
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
