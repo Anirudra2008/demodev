@@ -1269,7 +1269,7 @@ function App() {
               alt="Dr. Sarah Mitchell - Lead Dermatologist at Medicutis"
               loading="lazy"
               decoding="async"
-              className="w-full h-full object-cover absolute inset-0 object-top group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover absolute inset-0 object-center md:object-top group-hover:scale-105 transition-transform duration-500"
             />
             <div
               className="absolute inset-0"
