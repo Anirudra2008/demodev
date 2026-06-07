@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Lenis from "lenis";
 import IntroAnimation from "./components/IntroAnimation";
+import { Analytics } from "@vercel/analytics/react";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -1651,6 +1652,7 @@ function App() {
         }
       `}</style>
     </div>
+    <Analytics />
     </>
   );
 }
