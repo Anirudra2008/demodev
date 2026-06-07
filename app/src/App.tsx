@@ -120,15 +120,8 @@ const GALLERY_CARDS = [
 function GallerySlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
 
-  const dragStartX = useRef(0);
-  const dragStartIndex = useRef(0);
-  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const totalCards = GALLERY_CARDS.length;
@@ -144,20 +137,6 @@ function GallerySlider() {
     updateVisible();
     window.addEventListener("resize", updateVisible);
     return () => window.removeEventListener("resize", updateVisible);
-  }, []);
-
-  /* Track viewport width dynamically */
-  useEffect(() => {
-    if (!viewportRef.current) return;
-    setViewportWidth(viewportRef.current.offsetWidth);
-
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setViewportWidth(entry.contentRect.width);
-      }
-    });
-    observer.observe(viewportRef.current);
-    return () => observer.disconnect();
   }, []);
 
   /* Extended cards: clone first `visibleCount` at the end for seamless loop */
@@ -188,8 +167,6 @@ function GallerySlider() {
      The interval never resets on state changes — it ticks continuously
      so there is zero dead time at the loop boundary. */
   useEffect(() => {
-    if (isPaused || isDragging) return;
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         if (prev >= totalCards) return prev; // snap-back is in progress
@@ -198,7 +175,7 @@ function GallerySlider() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isPaused, isDragging, totalCards]);
+  }, [totalCards]);
 
   /* Seamless loop: when reaching clone boundary, snap back to 0 instantly */
   useEffect(() => {
@@ -234,96 +211,16 @@ function GallerySlider() {
     [totalCards],
   );
 
-  /* Touch/mouse drag handlers */
-  const onPointerDown = (e: React.PointerEvent) => {
-    if (e.button !== 0) return; // Only drag on left click
-    
-    let startIdx = currentIndex;
-    if (startIdx >= totalCards) {
-      startIdx = 0;
-      setCurrentIndex(0);
-      setTransitionEnabled(false);
-    }
-
-    setIsDragging(true);
-    setDragOffset(0);
-    dragStartX.current = e.clientX;
-    dragStartIndex.current = startIdx;
-    setTransitionEnabled(false);
-    viewportRef.current?.setPointerCapture(e.pointerId);
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!isDragging || !viewportRef.current || viewportWidth === 0) return;
-    const deltaX = e.clientX - dragStartX.current;
-    const cardWidth = viewportWidth / visibleCount;
-    
-    // Boundary check with resistance
-    const minPosition = -totalCards * cardWidth;
-    const maxPosition = 0;
-    const currentPosition = -dragStartIndex.current * cardWidth + deltaX;
-    
-    let newOffset = deltaX;
-    if (currentPosition > maxPosition) {
-      const over = currentPosition - maxPosition;
-      newOffset = deltaX - over * 0.5; // 50% resistance
-    } else if (currentPosition < minPosition) {
-      const over = currentPosition - minPosition;
-      newOffset = deltaX - over * 0.5; // 50% resistance
-    }
-    
-    setDragOffset(newOffset);
-  };
-
-  const onPointerUp = (e: React.PointerEvent) => {
-    if (!isDragging || !viewportRef.current || viewportWidth === 0) return;
-    setIsDragging(false);
-    viewportRef.current.releasePointerCapture(e.pointerId);
-
-    const cardWidth = viewportWidth / visibleCount;
-    const cardsMoved = -dragOffset / cardWidth;
-    
-    // Snap threshold: if moved more than 20% of card width, snap to next/prev
-    let targetIndex = dragStartIndex.current;
-    if (Math.abs(cardsMoved) > 0.2) {
-      targetIndex = dragStartIndex.current + Math.round(cardsMoved);
-    }
-    
-    // Clamp target index
-    targetIndex = Math.max(0, Math.min(targetIndex, totalCards));
-    
-    setDragOffset(0);
-    setTransitionEnabled(true);
-    setCurrentIndex(targetIndex);
-  };
-
   /* Render parameters */
-  const isUsingPixels = isDragging || dragOffset !== 0;
-  const cardWidth = visibleCount > 0 && viewportWidth > 0 ? viewportWidth / visibleCount : 0;
-  
-  const transformStyle = isUsingPixels && cardWidth > 0
-    ? `translateX(${-currentIndex * cardWidth + dragOffset}px)`
-    : `translateX(${-(currentIndex * (100 / visibleCount))}%)`;
-
-  const shouldTransition = transitionEnabled && !isDragging;
+  const transformStyle = `translateX(${-(currentIndex * (100 / visibleCount))}%)`;
+  const shouldTransition = transitionEnabled;
   const dotIndex = currentIndex % totalCards;
 
   return (
-    <div
-      className={`gallery-slider-root${
-        isPaused ? " gallery-slider-paused" : ""
-      }`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <div className="gallery-slider-root">
       <div className="gallery-slider-outer">
         <div
           className="gallery-track-viewport"
-          ref={viewportRef}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          style={{ touchAction: "pan-y" }}
         >
           <div
             className="gallery-track"

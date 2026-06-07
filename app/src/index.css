@@ -20,12 +20,7 @@
 .gallery-track-viewport {
   flex: 1;
   overflow: hidden;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-}
-.gallery-track-viewport:active {
-  cursor: grabbing;
+  pointer-events: none;
 }
 
 /* The actual sliding track */
@@ -150,9 +145,6 @@
   border-radius: inherit;
   transform-origin: left;
   animation: dot-progress 1s linear forwards;
-}
-.gallery-slider-paused .gallery-dot-active::after {
-  animation-play-state: paused;
 }
 @keyframes dot-progress {
   from { transform: scaleX(0); }
