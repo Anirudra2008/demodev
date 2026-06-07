@@ -1060,7 +1060,7 @@ html.lenis, html.lenis body {
 
 @media (max-width: 1023px) {
   .hero-doctor-container {
-    top: 0;
+    top: -30px;
     bottom: 42%;
     left: 0;
     right: 0;
@@ -1069,7 +1069,7 @@ html.lenis, html.lenis body {
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
   }
   .hero-doctor-img {
-    transform: translateY(3%) scale(1.48);
+    transform: scale(1.48);
   }
 }
 
