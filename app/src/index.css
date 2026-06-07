@@ -1046,3 +1046,51 @@ html.lenis, html.lenis body {
 .intro-line--right {
   transform-origin: left center;
 }
+
+/* ════════════════════ HERO DOCTOR RESPONSIVE IMAGE ════════════════════ */
+
+.hero-doctor-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 75%, transparent 100%);
+}
+
+.hero-doctor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.12));
+  transform-origin: top center;
+}
+
+@media (max-width: 1023px) {
+  .hero-doctor-container {
+    top: 80px;
+    bottom: 42%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 65%, transparent 100%);
+  }
+  .hero-doctor-img {
+    transform: translateY(5%) scale(1.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-doctor-container {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    width: 50%;
+  }
+  .hero-doctor-img {
+    transform: translateY(8%) scale(1.55);
+  }
+}
+

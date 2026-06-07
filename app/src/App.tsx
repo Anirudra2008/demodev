@@ -1051,26 +1051,13 @@ function App() {
       <section className="relative z-20 flex flex-col min-h-[calc(100vh-80px)] overflow-hidden">
         {/* ── Doctor hero image — centered in right half ── */}
         <div
-          className="absolute top-0 bottom-0 pointer-events-none hidden lg:block"
+          className="hero-doctor-container"
           aria-hidden="true"
-          style={{
-            left: "50%",
-            right: 0,
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 4%, black 70%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 4%, black 70%, transparent 100%)",
-          }}
         >
           <img
             src="/doctor-hero.png"
             alt="Medicutis lead doctor"
-            className="w-full h-full object-contain object-top"
-            style={{
-              filter: "drop-shadow(0 16px 40px rgba(0,0,0,0.10))",
-              transform: "translateY(8%) scale(1.5)",
-              transformOrigin: "top center",
-            }}
+            className="hero-doctor-img"
           />
         </div>
 
