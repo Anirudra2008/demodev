@@ -843,6 +843,11 @@ function App() {
             </div>
           </div>
 
+          {/* MIDDLE: Medicutis (Mobile only) */}
+          <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-dmSerif text-[20px] font-bold tracking-wide text-docNavy">
+            Medicutis
+          </div>
+
           {/* RIGHT: Status, clock, CTA */}
           <div className="hidden md:flex items-center gap-4 lg:gap-5">
             <span className="hidden lg:block text-[13px] glass-status-text">
