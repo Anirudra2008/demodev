@@ -149,7 +149,7 @@
   background: rgba(255, 255, 255, 0.35);
   border-radius: inherit;
   transform-origin: left;
-  animation: dot-progress 3.5s linear forwards;
+  animation: dot-progress 0.5s linear forwards;
 }
 .gallery-slider-paused .gallery-dot-active::after {
   animation-play-state: paused;
