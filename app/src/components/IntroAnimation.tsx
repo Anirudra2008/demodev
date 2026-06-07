@@ -21,7 +21,8 @@ function generateParticles(count: number) {
   }));
 }
 
-const PARTICLES = generateParticles(40);
+const isMobileDevice = typeof window !== "undefined" && window.innerWidth < 768;
+const PARTICLES = generateParticles(isMobileDevice ? 15 : 40);
 
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -85,12 +86,11 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     /* Phase 3 — Logo reveals with scale + rotation */
     tl.fromTo(
       logoRef.current,
-      { opacity: 0, scale: 0.3, rotateY: -90, filter: "blur(12px)" },
+      { opacity: 0, scale: 0.3, rotateY: -90 },
       {
         opacity: 1,
         scale: 1,
         rotateY: 0,
-        filter: "blur(0px)",
         duration: 0.55,
         ease: "power3.out",
       },
@@ -114,11 +114,10 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     /* Phase 5 — Tagline text reveals */
     tl.fromTo(
       taglineRef.current,
-      { opacity: 0, y: 14, filter: "blur(6px)" },
+      { opacity: 0, y: 14 },
       {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         duration: 0.4,
         ease: "power2.out",
       },
@@ -132,7 +131,6 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     tl.to(logoRef.current, {
       scale: 0.8,
       opacity: 0,
-      filter: "blur(6px)",
       duration: 0.3,
       ease: "power2.in",
     });
