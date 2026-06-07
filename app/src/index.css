@@ -1094,3 +1094,31 @@ html.lenis, html.lenis body {
   }
 }
 
+/* ════════════════════ STATS ROW AUTO-SCROLL ════════════════════ */
+
+@media (max-width: 767px) {
+  .stats-track {
+    display: flex;
+    animation: statsScroll 16s linear infinite;
+  }
+}
+
+@media (min-width: 768px) {
+  .stats-track {
+    display: flex;
+    width: 100% !important;
+    animation: none !important;
+  }
+}
+
+@keyframes statsScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Translate exactly by half the width of the duplicated track */
+    transform: translateX(-50%);
+  }
+}
+
+

@@ -1153,38 +1153,77 @@ function App() {
           {/* CELL B — Stats Row */}
           <div
             data-animate
-            className="col-span-1 md:col-span-6 md:col-start-1 md:row-start-2 lg:col-span-7 lg:col-start-1 lg:row-start-2 flex items-stretch border-t border-b border-docPastel/35 overflow-x-auto -webkit-overflow-scrolling-touch"
+            className="col-span-1 md:col-span-6 md:col-start-1 md:row-start-2 lg:col-span-7 lg:col-start-1 lg:row-start-2 border-t border-b border-docPastel/35 overflow-hidden"
           >
-            {/* Stat 1 */}
-            <div className="flex-1 min-w-[200px] py-7 px-8 pl-0 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center">
-              <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
-                12+
-              </span>
-              <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
-                Years of Excellence
-              </span>
-            </div>
-            {/* Divider */}
-            <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0" />
-            {/* Stat 2 */}
-            <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center">
-              <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
-                8,000+
-              </span>
-              <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
-                Patients Treated
-              </span>
-            </div>
-            {/* Divider */}
-            <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0" />
-            {/* Stat 3 */}
-            <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center">
-              <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
-                98%
-              </span>
-              <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
-                Satisfaction Rate
-              </span>
+            <div className="stats-track flex items-stretch w-max md:w-full">
+              {/* Stat 1 */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  12+
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Years of Excellence
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0" />
+              {/* Stat 2 */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  8,000+
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Patients Treated
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0" />
+              {/* Stat 3 */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  98%
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Satisfaction Rate
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0" />
+
+              {/* ── DUPLICATES FOR SEAMLESS AUTO-SCROLL ON MOBILE ── */}
+              {/* Stat 1 Duplicate */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0 md:hidden">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  12+
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Years of Excellence
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0 md:hidden" />
+              {/* Stat 2 Duplicate */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0 md:hidden">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  8,000+
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Patients Treated
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0 md:hidden" />
+              {/* Stat 3 Duplicate */}
+              <div className="flex-1 min-w-[200px] py-7 px-8 group cursor-pointer hover:bg-slate-50/50 transition-all duration-300 flex flex-col justify-center shrink-0 md:hidden">
+                <span className="font-dmSerif text-[36px] text-docNavy transition-transform duration-300 group-hover:scale-105 inline-block origin-left">
+                  98%
+                </span>
+                <span className="font-dmSans text-[12px] uppercase tracking-[0.08em] text-docNavy/60 mt-1">
+                  Satisfaction Rate
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="w-[1px] bg-docPastel/35 self-stretch my-6 shrink-0 md:hidden" />
             </div>
           </div>
 
